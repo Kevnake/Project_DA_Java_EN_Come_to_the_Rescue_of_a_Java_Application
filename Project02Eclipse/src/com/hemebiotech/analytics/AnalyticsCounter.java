@@ -1,35 +1,22 @@
 package com.hemebiotech.analytics;
 
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.TreeMap;
 
 public class AnalyticsCounter {
-	private static int headCount = 0; // headache counter
-	private static int rashCount = 0; // rash counter
-	private static int pupilCount = 0; // pupil counter
 
-	public static void main(String args[]) throws Exception {
-		// first get input
-		String filePath = "Project02Eclipse\\symptoms.txt";
-		String symptomPath = "Project02Eclipse\\symptomsList.txt";
-		ReadSymptomDataFromFile file = new ReadSymptomDataFromFile(filePath);
-		ReadSymptomDataFromFile symp = new ReadSymptomDataFromFile(symptomPath);
+	private static TreeMap<String, Integer> treeMap = new TreeMap<String, Integer>();
 
-		List<String> symptoms = new ArrayList<>();
-		symptoms = file.GetSymptoms();
+	public AnalyticsCounter() {
 
-		List<Symptom> symptomsList = new ArrayList<>();
-		symptomsList = symp.GetSymptomsList();
-
-		// System.out.println("Test");
-
-		Symptom.symptomCounter(symptoms, symptomsList);
-
-		FileWriter writer = new FileWriter("result.out");
-		writer.write("headache: " + headCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
 	}
+
+	public static void start() {
+		String filePath = "Project02Eclipse\\symptoms.txt";
+		ReadSymptomDataFromFile file = new ReadSymptomDataFromFile(filePath);
+		treeMap = file.GetSymptoms();
+		System.out.println(treeMap);
+		WriteSymptomDataToFile extract = new WriteSymptomDataToFile(treeMap);
+		System.out.println("Operation over.");
+	}
+
 }

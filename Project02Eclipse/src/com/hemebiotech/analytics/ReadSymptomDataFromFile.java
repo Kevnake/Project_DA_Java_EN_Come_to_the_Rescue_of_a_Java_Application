@@ -1,10 +1,6 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Simple brute force implementation
@@ -13,6 +9,7 @@ import java.util.List;
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
 	private String filepath;
+	private ManageData md = new ManageData();
 
 	/**
 	 * 
@@ -24,44 +21,10 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	}
 
 	@Override
-	public List<String> GetSymptoms() {
-		ArrayList<String> result = new ArrayList<String>();
+	public TreeMap<String, Integer> GetSymptoms() {
+		TreeMap<String, Integer> result = new TreeMap<String, Integer>();
+		result = md.CollectData(filepath);
 
-		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader(new FileReader(filepath));
-				String line = reader.readLine();
-
-				while (line != null) {
-					result.add(line);
-					line = reader.readLine();
-				}
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return result;
-	}
-
-	public List<Symptom> GetSymptomsList() {
-		ArrayList<Symptom> result = new ArrayList<Symptom>();
-		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader(new FileReader(filepath));
-				String line = reader.readLine();
-
-				while (line != null) {
-					Symptom s = new Symptom(line);
-					result.add(s);
-					line = reader.readLine();
-				}
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 		return result;
 	}
 

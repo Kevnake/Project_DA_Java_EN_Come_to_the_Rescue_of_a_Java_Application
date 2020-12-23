@@ -50,7 +50,7 @@ public class ManageData {
 			}
 
 			writer.close();
-			System.out.println("Files result.out générated.");
+			System.out.println("Files result.out generated.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
